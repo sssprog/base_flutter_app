@@ -1,0 +1,7 @@
+{
+  "app_name": "Base Flutter App",
+  "authScreenTitle": "Auth screen",
+  "login": "Login",
+  "password": "Password",
+  "defaultErrorMessage": "Something went wrong"
+}

@@ -1,10 +1,10 @@
 import 'package:base_flutter_app/data/repository/Preferences.dart';
 import 'package:base_flutter_app/data/repository/auth_repository.dart';
-import 'package:base_flutter_app/ui/utils/ErrorMapper.dart';
+import 'package:base_flutter_app/l10n/app_localizations.dart';
+import 'package:base_flutter_app/ui/utils/error_mapper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'FactoryProvider.dart';
 
 class AppComponent extends StatelessWidget {
   final Widget _child;
@@ -17,7 +17,13 @@ class AppComponent extends StatelessWidget {
       providers: [
         Provider(create: (_) => Preferences()),
         Provider(create: (context) => AuthRepository(context.read())),
-        FactoryProvider(create: (context) => ErrorMapper()),
+        Provider(
+          create: (context) {
+            return ErrorMapper(
+              lookupAppLocalizations(PlatformDispatcher.instance.locale),
+            );
+          },
+        ),
       ],
       child: _child,
     );

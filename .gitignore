@@ -45,3 +45,7 @@ app.*.map.json
 /android/app/release
 
 .fvm/flutter_sdk
+
+*.freezed.dart
+*.g.dart
+/lib/l10n/*.dart
