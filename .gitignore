@@ -48,4 +48,5 @@ app.*.map.json
 
 *.freezed.dart
 *.g.dart
+*.mocks.dart
 /lib/l10n/*.dart

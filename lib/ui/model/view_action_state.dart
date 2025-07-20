@@ -1,8 +1,6 @@
 import 'package:base_flutter_app/ui/model/ui_error.dart';
 
 sealed class ViewActionState {
-  ViewActionState();
-
   factory ViewActionState.none() => None();
 
   factory ViewActionState.loading() => Loading();
@@ -12,13 +10,13 @@ sealed class ViewActionState {
   factory ViewActionState.error(UiError error) => Error(error);
 }
 
-class None extends ViewActionState {}
+class None implements ViewActionState {}
 
-class Loading extends ViewActionState {}
+class Loading implements ViewActionState {}
 
-class Success extends ViewActionState {}
+class Success implements ViewActionState {}
 
-class Error extends ViewActionState {
+class Error implements ViewActionState {
   final UiError error;
 
   Error(this.error);

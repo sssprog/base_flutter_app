@@ -1,5 +1,7 @@
+import 'package:base_flutter_app/data/model/api_error_code.dart';
+
 class ApiException implements Exception {
-  final String code;
+  final ApiErrorCode code;
   final String description;
 
   ApiException(this.code, this.description);
