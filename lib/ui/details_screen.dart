@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final VoidCallback onBackClick;
+
+  const DetailsScreen({super.key, required this.onBackClick});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class DetailsScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Details Screen')),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => context.go('/'),
+          onPressed: onBackClick,
           child: const Text('Go back to the Home screen'),
         ),
       ),

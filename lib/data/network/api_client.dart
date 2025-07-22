@@ -17,7 +17,7 @@ class ApiClient {
 
   Future<T> get<T>(
     Uri uri,
-    T Function(Map<String, Object?> json) fromJson, {
+    T Function(String) fromJson, {
     Map<String, String> headers = const {},
   }) async {
     return await makeRequest(
@@ -39,7 +39,7 @@ class ApiClient {
   @protected
   Future<T> makeRequest<T>(
     Future<Response> Function() request,
-    T Function(Map<String, Object?> json) fromJson,
+    T Function(String) fromJson,
   ) async {
     var attempt = 1;
     while (true) {
@@ -58,15 +58,16 @@ class ApiClient {
 
   Future<T> _makeRequest<T>(
     Future<Response> Function() request,
-    T Function(Map<String, Object?> json) fromJson,
+    T Function(String) fromJson,
   ) async {
     try {
       final response = await request();
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        return fromJson(jsonDecode(response.body));
+        return fromJson(response.body);
       }
       throw _errorMapper.fromResponse(response);
     } catch (e) {
+      debugPrint("$e");
       throw _errorMapper.fromException(e);
     }
   }

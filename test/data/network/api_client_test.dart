@@ -30,7 +30,7 @@ void main() {
         (realInvocation) async => http.Response('{}', 200),
       );
 
-      expect(await apiClient.get(Uri.parse(""), Rocket.fromJson), isA<Rocket>());
+      expect(await apiClient.get(Uri.parse(""), Rocket.fromJsonString), isA<Rocket>());
       verify(client.get(any, headers: anyNamed('headers'))).called(1);
     });
 
@@ -38,7 +38,7 @@ void main() {
       when(client.get(any, headers: anyNamed('headers'))).thenThrow(Exception());
       when(errorMapper.fromException(any)).thenReturn(ApiException(ApiErrorCode.serverProblem, ""));
 
-      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJson), throwsException);
+      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJsonString), throwsException);
       verify(client.get(any, headers: anyNamed('headers'))).called(3);
     });
 
@@ -46,7 +46,7 @@ void main() {
       when(client.get(any, headers: anyNamed('headers'))).thenThrow(Exception());
       when(errorMapper.fromException(any)).thenReturn(ApiException(ApiErrorCode.unknown, ""));
 
-      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJson), throwsException);
+      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJsonString), throwsException);
       verify(client.get(any, headers: anyNamed('headers'))).called(1);
     });
   });

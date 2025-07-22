@@ -39,7 +39,7 @@ void main() {
       );
       when(tokenRefresher.authToken).thenAnswer((_) async => _authToken);
 
-      await apiClient.get(Uri.parse(""), Rocket.fromJson);
+      await apiClient.get(Uri.parse(""), Rocket.fromJsonString);
       verifyNever(tokenRefresher.refreshToken(any));
     });
 
@@ -63,7 +63,7 @@ void main() {
         currentToken = "${_authToken}qwe";
       });
 
-      expect(await apiClient.get(Uri.parse(""), Rocket.fromJson), isA<Rocket>());
+      expect(await apiClient.get(Uri.parse(""), Rocket.fromJsonString), isA<Rocket>());
       verify(client.get(any, headers: anyNamed('headers'))).called(2);
       verify(tokenRefresher.refreshToken(_authToken)).called(1);
       verifyNever(tokenRefresher.refreshToken(any));
@@ -77,7 +77,7 @@ void main() {
       when(tokenRefresher.authToken).thenAnswer((_) async => _authToken);
       when(tokenRefresher.refreshToken(_authToken)).thenAnswer((_) async {});
 
-      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJson), throwsException);
+      await expectLater(apiClient.get(Uri.parse(""), Rocket.fromJsonString), throwsException);
       verify(client.get(any, headers: anyNamed('headers'))).called(4);
       verify(tokenRefresher.refreshToken(_authToken)).called(3);
     });

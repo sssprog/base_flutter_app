@@ -1,7 +1,8 @@
 import 'package:base_flutter_app/ui/auth/auth_component.dart';
 import 'package:base_flutter_app/ui/auth/auth_screen.dart';
 import 'package:base_flutter_app/ui/details_screen.dart';
-import 'package:base_flutter_app/ui/home_screen.dart';
+import 'package:base_flutter_app/ui/home/home_component.dart';
+import 'package:base_flutter_app/ui/home/home_screen.dart';
 import 'package:base_flutter_app/ui/splash/splash_component.dart';
 import 'package:base_flutter_app/ui/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -39,14 +40,16 @@ final _authRoute = GoRoute(
 
 final _homeRoute = GoRoute(
   path: _Routes.home,
-  builder: (context, state) {
-    return const HomeScreen();
-  },
+  builder: (context, state) => HomeComponent(
+    child: HomeScreen(
+      onItemClick: (item) => context.go(_Routes.homeDetails),
+    ),
+  ),
   routes: <RouteBase>[
     GoRoute(
       path: '/details',
       builder: (context, state) {
-        return const DetailsScreen();
+        return DetailsScreen(onBackClick: () => context.go(_Routes.home),);
       },
     ),
   ],
@@ -55,5 +58,6 @@ final _homeRoute = GoRoute(
 class _Routes {
   static const splash = "/";
   static const home = "/home";
+  static const homeDetails = "/home/details";
   static const auth = "/auth";
 }

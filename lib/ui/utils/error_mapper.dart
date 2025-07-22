@@ -9,7 +9,9 @@ class ErrorMapper {
   ErrorMapper(this._appLocalizations);
 
   UiError map(Object e) {
-    if (e is! ApiException) return UiError(_appLocalizations.defaultErrorMessage);
+    if (e is! ApiException || e.description.isEmpty) {
+      return UiError(_appLocalizations.defaultErrorMessage);
+    }
     return UiError(e.description);
   }
 }

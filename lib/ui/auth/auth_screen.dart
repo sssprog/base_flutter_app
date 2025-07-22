@@ -47,7 +47,7 @@ class AuthScreen extends StatelessWidget {
 class _Content extends StatefulWidget {
   final VoidCallback onOpenHome;
 
-  const _Content({super.key, required this.onOpenHome});
+  const _Content({required this.onOpenHome});
 
   @override
   State<_Content> createState() => _ContentState();

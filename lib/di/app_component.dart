@@ -3,9 +3,11 @@ import 'package:base_flutter_app/data/network/api_error_mapper.dart';
 import 'package:base_flutter_app/data/network/api_url_provider.dart';
 import 'package:base_flutter_app/data/network/auth_service.dart';
 import 'package:base_flutter_app/data/network/authorized_api_client.dart';
+import 'package:base_flutter_app/data/network/rockets_api.dart';
 import 'package:base_flutter_app/data/network/token_refresher.dart';
 import 'package:base_flutter_app/data/repository/preferences.dart';
 import 'package:base_flutter_app/data/repository/auth_repository.dart';
+import 'package:base_flutter_app/data/repository/rocket_repository.dart';
 import 'package:base_flutter_app/l10n/app_localizations.dart';
 import 'package:base_flutter_app/ui/utils/error_mapper.dart';
 import 'package:flutter/foundation.dart';
@@ -35,6 +37,8 @@ class AppComponent extends StatelessWidget {
             context.read(),
           ),
         ),
+        Provider(create: (context) => RocketsApi(context.read(), context.read())),
+        Provider(create: (context) => RocketRepository(context.read())),
         Provider(
           create: (context) {
             return ErrorMapper(

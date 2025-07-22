@@ -3,5 +3,7 @@
   "authScreenTitle": "Auth screen",
   "login": "Login",
   "password": "Password",
-  "defaultErrorMessage": "Something went wrong"
+  "defaultErrorMessage": "Something went wrong",
+  "emptyListMessage": "List is empty",
+  "retry": "Retry"
 }

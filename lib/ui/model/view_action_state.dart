@@ -1,14 +1,6 @@
 import 'package:base_flutter_app/ui/model/ui_error.dart';
 
-sealed class ViewActionState {
-  factory ViewActionState.none() => None();
-
-  factory ViewActionState.loading() => Loading();
-
-  factory ViewActionState.success() => Success();
-
-  factory ViewActionState.error(UiError error) => Error(error);
-}
+sealed class ViewActionState {}
 
 class None implements ViewActionState {}
 

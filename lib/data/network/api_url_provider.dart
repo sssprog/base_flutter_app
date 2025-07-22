@@ -3,7 +3,7 @@ class ApiUrlProvider {
 
   ApiUrlProvider(this.baseUrl);
 
-  String urlForPath(String path) {
-    return baseUrl + path;
+  Uri urlForPath(String path) {
+    return Uri.parse(baseUrl + path);
   }
 }

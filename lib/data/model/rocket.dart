@@ -1,3 +1,4 @@
+import 'package:base_flutter_app/data/utils/json_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'rocket.freezed.dart';
 part 'rocket.g.dart';
@@ -12,6 +13,8 @@ abstract class Rocket with _$Rocket {
     @Default(10) @JsonKey(name: "cost_per_launch") int costPerLaunch,
     @Default([]) @JsonKey(name: "flickr_images") List<String> images,
   }) = _Rocket;
+
+  factory Rocket.fromJsonString(String json) => objectFromJson(json, Rocket.fromJson);
 
   factory Rocket.fromJson(Map<String, Object?> json) => _$RocketFromJson(json);
 }

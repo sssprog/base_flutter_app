@@ -11,15 +11,16 @@ class AuthorizedApiClient extends ApiClient {
 
   AuthorizedApiClient(super.client, super.errorMapper, this._tokenRefresher);
 
-  @override
-  Future<Map<String, String>> get baseHeaders async => {
-    HttpHeaders.authorizationHeader: await _tokenRefresher.authToken,
-  };
+  /// This is for some real api. Current rockets api doesn't work when sending this header
+  // @override
+  // Future<Map<String, String>> get baseHeaders async => {
+  //   HttpHeaders.authorizationHeader: await _tokenRefresher.authToken,
+  // };
 
   @override
   Future<T> makeRequest<T>(
     Future<Response> Function() request,
-    T Function(Map<String, Object?> json) fromJson,
+    T Function(String) fromJson,
   ) async {
     var authToken = await _tokenRefresher.authToken;
     var attempt = 1;
