@@ -12,33 +12,36 @@ class ViewStateWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return switch (state) {
-      Loading() => Center(child: const CircularProgressIndicator()),
-      Empty<T>() => Center(
-        child: Text(
-          AppLocalizations.of(context).emptyListMessage,
-          style: TextTheme.of(context).headlineSmall,
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      child: switch (state) {
+        Loading() => Center(child: const CircularProgressIndicator()),
+        Empty<T>() => Center(
+          child: Text(
+            AppLocalizations.of(context).emptyListMessage,
+            style: TextTheme.of(context).headlineSmall,
+          ),
         ),
-      ),
-      (Success<T> success) => builder(context, success.data),
-      (Error<T> error) => SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              error.error.description,
-              style: TextTheme.of(context).headlineSmall,
-            ),
-            SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: onRetry,
-              child: Text(AppLocalizations.of(context).retry),
-            ),
-          ],
+        (Success<T> success) => builder(context, success.data),
+        (Error<T> error) => SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                error.error.description,
+                style: TextTheme.of(context).headlineSmall,
+              ),
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: onRetry,
+                child: Text(AppLocalizations.of(context).retry),
+              ),
+            ],
+          ),
         ),
-      ),
-    };
+      },
+    );
   }
 }

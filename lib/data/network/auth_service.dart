@@ -12,6 +12,7 @@ class AuthService {
   AuthService(this._client, this._apiUrlProvider);
 
   Future<TokenResponse> login(String login, String password) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     if (login != "qwe" || password != "qwe") {
       throw ApiException(ApiErrorCode.unknown, "Wrong login or password");
     }

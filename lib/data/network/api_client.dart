@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:base_flutter_app/data/model/api_error_code.dart';
 import 'package:base_flutter_app/data/model/api_exception.dart';
 import 'package:base_flutter_app/data/network/api_error_mapper.dart';
