@@ -1,19 +1,13 @@
 import 'package:base_flutter_app/data/model/rocket.dart';
-import 'package:base_flutter_app/data/network/authorized_api_client.dart';
-import 'package:base_flutter_app/data/utils/json_utils.dart';
+import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
 
-import 'api_url_provider.dart';
+part 'rockets_api.g.dart';
 
-class RocketsApi {
-  final AuthorizedApiClient _client;
-  final ApiUrlProvider _apiUrlProvider;
+@RestApi()
+abstract class RocketsApi {
+  factory RocketsApi(Dio dio, {String? baseUrl}) = _RocketsApi;
 
-  RocketsApi(this._client, this._apiUrlProvider);
-
-  Future<List<Rocket>> rockets() async {
-    return await _client.get(
-      _apiUrlProvider.urlForPath("rockets"),
-      (json) => listFromJson(json, Rocket.fromJson),
-    );
-  }
+  @GET('rockets')
+  Future<List<Rocket>> rockets();
 }
